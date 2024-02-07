@@ -87,7 +87,7 @@ const RenderSelect = ({
 }: Props) => (
   <Select
     key={config.property}
-    onValueChange={(value) => handleInputChange(config.property, value)}
+    onValueChange={(value:any) => handleInputChange(config.property, value)}
     value={
       config.property === "fontFamily"
         ? fontFamily
