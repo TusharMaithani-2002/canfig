@@ -5,7 +5,7 @@ import NavBar from "@/components/NavBar";
 import RightSideBar from "@/components/RightSideBar";
 import { useEffect, useRef, useState } from "react";
 import {fabric} from 'fabric';
-import { handleCanvasMouseDown, handleCanvaseMouseMove, handleResize, initializeFabric, handleCanvasMouseUp, renderCanvas, handleCanvasObjectModified, handleCanvasSelectionCreated } from "@/lib/canvas";
+import { handleCanvasMouseDown, handleCanvaseMouseMove, handleResize, initializeFabric, handleCanvasMouseUp, renderCanvas, handleCanvasObjectModified, handleCanvasSelectionCreated, handleCanvasObjectScaling } from "@/lib/canvas";
 import { ActiveElement, Attributes } from "@/types/type";
 import { useMutation, useRedo, useStorage, useUndo } from "@/liveblocks.config";
 import { defaultNavElement } from "@/constants";
@@ -144,6 +144,12 @@ export default function Home() {
       })
     })
 
+    canvas.on("object:scaling",(options:any) => {
+      handleCanvasObjectScaling({
+        options,
+        setElementAttributes
+      })
+    })
     window.addEventListener("resize",() => {
       handleResize({canvas:fabricRef.current})
     })
